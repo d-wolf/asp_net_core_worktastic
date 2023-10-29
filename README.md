@@ -10,3 +10,7 @@
 * ef command `dotnet ef`
 * update database `dotnet ef database update`
 * add migration `dotnet ef migrations add <NAME>`
+
+## Sample User
+* name: `test@mail.com`
+* pw: `5kX99xM7KxQz$Ha`
