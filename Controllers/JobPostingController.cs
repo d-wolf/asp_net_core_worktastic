@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
 using worktastic.Data;
 using worktastic.Models;
 
 namespace worktastic.Controllers;
 
+[Authorize]
 public class JobPostingController : Controller
 {
 
@@ -17,14 +18,53 @@ public class JobPostingController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var jobPostingsFromDb = _context.JobPostings.Where(x => x.OwnerUserName == User.Identity!.Name).ToList();
+        return View(jobPostingsFromDb);
     }
 
     public IActionResult CreateEditJobPosting(int id)
     {
-        var jobPostingsFromDb = _context.JobPostings.Where(x => x.OwnerUserName == User.Identity!.Name).ToList();
-        return View(jobPostingsFromDb);
+        if (id != 0)
+        {
+            var jobPostingFromDb = _context.JobPostings.SingleOrDefault(x => x.Id == id);
+
+            if (jobPostingFromDb == null)
+            {
+                return NotFound();
+            }
+
+            if (jobPostingFromDb!.OwnerUserName != User.Identity?.Name)
+            {
+                return Unauthorized();
+            }
+
+            return View(jobPostingFromDb);
+        }
+
+        return View();
     }
+
+    [HttpPost]
+    public IActionResult DeleteJobPostingById(int id)
+    {
+        if (id != 0)
+        {
+            var jobPostingFromDb = _context.JobPostings.SingleOrDefault(x => x.Id == id);
+            if (jobPostingFromDb != null)
+            {
+                _context.JobPostings.Remove(jobPostingFromDb);
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        return NotFound();
+    }
+
 
     public IActionResult CreateEditJob(JobPosting jobPosting, IFormFile file)
     {
@@ -37,6 +77,10 @@ public class JobPostingController : Controller
             file.CopyTo(ms);
             var bytes = ms.ToArray();
             jobPosting.CompanyImage = bytes;
+        }
+        else
+        {
+            jobPosting.CompanyImage = Array.Empty<byte>();
         }
 
         // default int is 0

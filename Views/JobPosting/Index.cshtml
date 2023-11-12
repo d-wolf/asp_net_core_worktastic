@@ -6,21 +6,69 @@
 
 <a class="btn btn-primary" asp-controller="JobPosting" asp-action="CreateEditJobPosting">Neues Inserat anlegen</a>
 <hr />
-<table class="table table-striped table-bordered table-hover">
+<table id="jobPostingTable" class="table table-striped table-bordered table-hover">
     <thead class="table-dark">
         <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th>Title</th>
+            <th>Ort</th>
+            <th>Firmenname</th>
+            <th>Aktionen</th>
         </tr>
     </thead>
     <tbody>
         @{
-            foreach(JobPosting jobPosting in Model){
+            foreach (JobPosting jobPosting in Model)
+            {
                 <tr>
-                    <td>@jobPosting.Id</td>
-                    <td>@jobPosting.JobDescription</td>
+                    <td>@jobPosting.JobTitle</td>
+                    <td>@jobPosting.JobLocation</td>
+                    <td>@jobPosting.CompanyName</td>
+                    <td>
+                        <a asp-route-id="@jobPosting.Id" asp-controller="JobPosting" asp-action="CreateEditJobPosting"
+                            class="btn btn-warning">Edit</a>
+                        @* <a asp-route-id="@jobPosting.Id" asp-controller="JobPosting" asp-action="DeleteJobPosting" class="btn
+                btn-danger">Delete</a> *@
+                        <button onclick="onClickedDeleteButton(@jobPosting.Id)" class="btn btn-danger">Löschen</button>
+                    </td>
                 </tr>
             }
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#jobPostingTable').DataTable();
+        });
+
+        function onClickedDeleteButton(id) {
+            Swal.fire({
+                title: "Möchtest du das Inserat wirklich löschen?",
+                icon: "error",
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText: `Ja, löschen!`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("DeleteJobPostingById")",
+                        data: { id: id },
+                        success: function (msg) {
+                            Swal.fire('Wurde gelöscht!', '', 'success').then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        },
+                        error: function (msg) {
+                            Swal.fire('Ups, etwas ist schief gelaufen!', '', 'error');
+                        }
+                    })
+
+                }
+            });
+        }
+    </script>
+}
