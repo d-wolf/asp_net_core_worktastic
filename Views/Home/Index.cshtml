@@ -1,8 +1,86 @@
-﻿@{
+﻿@model List<JobPosting>
+
+@{
     ViewData["Title"] = "Job Übersicht";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Alle Jobs</h1>
-    @* <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+<div class="jumbotron bg-primary">
+    <div class="container">
+        <h1 class="display-1 text-white text-center">Worktastic</h1>
+        <p class="lead text-white text-center">Boost your carreer.</p>
+    </div>
 </div>
+
+<div class="row mt-4">
+    <div class="col-11">
+        <input class="form-control-lg form-control" type="text" placeholder="What position are you searching for?">
+    </div>
+</div>
+
+<div class="text-center mt-2">
+    <button class="btn btn-lg btn-primary">Suchen</button>
+</div>
+
+<hr />
+
+<div class="list-group mt-4">
+    @{
+        foreach (JobPosting jobPosting in Model)
+        {
+            <a onclick="showModal(@jobPosting.Id)" href="#"
+                class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@jobPosting.JobTitle</h5>
+                    <small>@jobPosting.JobLocation</small>
+                </div>
+                <p class="mb-1">@jobPosting.CompanyName
+                </p>
+                <small>Start: @jobPosting.StartDate.ToShortDateString()</small>
+            </a>
+        }
+    }
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalJobPosting" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" class="img-fluid" src=""></img>
+                <div id="modalDescription"></div>
+                <div id="modalSalary" class="mt-4 mb-4"></div>
+                <hr />
+                <div id="modalContact"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showModal(id) {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetJobPosting")",
+                data: { id: id },
+                success: function (data) {
+                    $('#modalImage').attr('src', `data:image/png;base64,${data.companyImage}`);
+                    $('#modalTitle').text(data.jobTitle);
+                    $('#modalDescription').text(data.jobDescription);
+                    $('#modalContact').text('Kontakt: ' + data.contactMail);
+                    $('#modalSalary').text('Jahresgehalt: ' + data.salary);
+                    var myModal = new bootstrap.Modal(document.getElementById('modalJobPosting'), {
+                        keyboard: false
+                    });
+                    myModal.show();
+                }
+            });
+        }
+    </script>
+
+
+}

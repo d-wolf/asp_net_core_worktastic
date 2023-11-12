@@ -1,23 +1,30 @@
 # Worktastic
+Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/JannickLeismann). The original code can be found [here](https://github.com/JannickLeismann/worktastic). This version is upgraded to NET Core 7.0 using bootstrap 5. Below you'll find the most common cmd arguments if you are not developing with VS on windows.
 
-## Project setup
-* created with template `dotnet new mvc --auth Individual -o <APP_NAME>`
-* check [this doc](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new) to learn more about how to use different templates for project initialization
-* check the [this doc](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/) to learn more about how to create a authentication based web page
-* for entity framework and tools check [this doc](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
+## Getting Started
+* install net core from [here](https://learn.microsoft.com/en-us/dotnet/core/install/)
+* to install entity framework (EF) and it's tools see [here](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
+* we can create a mvc razor auth app (like this) with `dotnet new mvc --auth Individual -o <APP_NAME_HERE>`
+* for other project templates, see [here](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new)
 
-## EF
-* ef command `dotnet ef`
-* update database `dotnet ef database update`
+## Common EF commands
+* EF base command `dotnet ef`
 * add migration `dotnet ef migrations add <NAME>`
+* create schema from migration `dotnet ef database update`
+* to learn more about migrations, see [here](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
 
-## Sample User
+
+## DB Sample Users
 * name: `max@mail.com`
 * pw: `5kX99xM7KxQz$Ha`
 
 * name: `david@mail.com`
 * pw: `1kX99xM7KxQz$Ha`
 
-## Run
-* debug with `dotnet watch`
-* run with `dotnet run`
+## Run Debug
+* build and run and automatically update changes `dotnet watch`
+* build and run `dotnet run`
+
+## Sources
+* https://github.com/JannickLeismann/worktastic
+* https://www.udemy.com/course/aspnet-core-intensivkurs/

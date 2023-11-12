@@ -1,21 +1,25 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using worktastic.Data;
 using worktastic.Models;
 
 namespace worktastic.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly ApplicationDbContext _context;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var allJobPostings = _context.JobPostings.ToList();
+        return View(allJobPostings);
     }
 
     public IActionResult Privacy()
@@ -27,5 +31,17 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+
+    [HttpGet]
+    public IActionResult GetJobPosting(int id)
+    {
+        if (id == 0)
+            return BadRequest();
+        var posting = _context.JobPostings.SingleOrDefault(x => x.Id == id);
+        if (posting == null)
+            return NotFound();
+        return Ok(posting);
     }
 }
