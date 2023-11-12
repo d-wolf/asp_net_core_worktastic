@@ -12,10 +12,10 @@
 * add migration `dotnet ef migrations add <NAME>`
 
 ## Sample User
-* name: `test@mail.com`
+* name: `max@mail.com`
 * pw: `5kX99xM7KxQz$Ha`
 
-* name: `test2@mail.com`
+* name: `david@mail.com`
 * pw: `1kX99xM7KxQz$Ha`
 
 ## Run
