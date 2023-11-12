@@ -1,5 +1,26 @@
+@model List<JobPosting>
+
 @{
     ViewData["Title"] = "Deine Inserate";
 }
 
 <a class="btn btn-primary" asp-controller="JobPosting" asp-action="CreateEditJobPosting">Neues Inserat anlegen</a>
+<hr />
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(JobPosting jobPosting in Model){
+                <tr>
+                    <td>@jobPosting.Id</td>
+                    <td>@jobPosting.JobDescription</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

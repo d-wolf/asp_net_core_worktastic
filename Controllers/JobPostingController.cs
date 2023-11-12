@@ -22,11 +22,15 @@ public class JobPostingController : Controller
 
     public IActionResult CreateEditJobPosting(int id)
     {
-        return View();
+        var jobPostingsFromDb = _context.JobPostings.Where(x => x.OwnerUserName == User.Identity!.Name).ToList();
+        return View(jobPostingsFromDb);
     }
 
     public IActionResult CreateEditJob(JobPosting jobPosting, IFormFile file)
     {
+
+        jobPosting.OwnerUserName = User.Identity!.Name!;
+
         if (file != null)
         {
             using var ms = new MemoryStream();
@@ -43,8 +47,9 @@ public class JobPostingController : Controller
         else
         {
             var jobFromDb = _context.JobPostings.SingleOrDefault(x => x.Id == jobPosting.Id);
-            
-            if(jobFromDb == null){
+
+            if (jobFromDb == null)
+            {
                 return NotFound();
             }
 
@@ -58,9 +63,10 @@ public class JobPostingController : Controller
             jobFromDb.JobDescription = jobPosting.JobDescription;
             jobFromDb.JobLocation = jobPosting.JobLocation;
             jobFromDb.StartDate = jobPosting.StartDate;
+            jobFromDb.OwnerUserName = jobPosting.OwnerUserName;
         }
 
-    
+
         _context.SaveChanges();
         return RedirectToAction("Index");
     }

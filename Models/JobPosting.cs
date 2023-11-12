@@ -23,5 +23,7 @@ namespace worktastic.Models
         public required string ContactWebsite { get; set; }
 
         public required byte[] CompanyImage { get; set; }
+
+        public required string OwnerUserName {get;set;}
     }
 }

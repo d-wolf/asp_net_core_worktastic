@@ -14,3 +14,7 @@
 ## Sample User
 * name: `test@mail.com`
 * pw: `5kX99xM7KxQz$Ha`
+
+## Run
+* debug with `dotnet watch`
+* run with `dotnet run`
