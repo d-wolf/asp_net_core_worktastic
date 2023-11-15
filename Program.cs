@@ -23,23 +23,23 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
     string role = "Admin";
-    
+
     if (!await roleManager.RoleExistsAsync(role))
     {
         await roleManager.CreateAsync(new IdentityRole(role));
     }
 
-    if (await userManager.FindByNameAsync("Admin") == null)
+    if (await userManager.FindByNameAsync("admin@worktastic.com") == null)
     {
         var newUser = new IdentityUser()
         {
-            UserName = "Admin",
+            UserName = "admin@worktastic.com",
             Email = "admin@worktastic.com",
         };
         var result = await userManager.CreateAsync(newUser, "Test.1234");
     }
 
-    var user = await userManager.FindByNameAsync("Admin");
+    var user = await userManager.FindByNameAsync("admin@worktastic.com");
     await userManager.AddToRoleAsync(user!, role);
 }
 

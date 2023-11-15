@@ -18,8 +18,17 @@ public class JobPostingController : Controller
 
     public IActionResult Index()
     {
-        var jobPostingsFromDb = _context.JobPostings.Where(x => x.OwnerUserName == User.Identity!.Name).ToList();
-        return View(jobPostingsFromDb);
+        if (User.IsInRole("Admin"))
+        {
+            var jobPostingsFromDb = _context.JobPostings.ToList();
+            return View(jobPostingsFromDb);
+        }
+        else
+        {
+            var jobPostingsFromDb = _context.JobPostings.Where(x => x.OwnerUserName == User.Identity!.Name).ToList();
+            return View(jobPostingsFromDb);
+        }
+
     }
 
     public IActionResult CreateEditJobPosting(int id)
@@ -33,7 +42,7 @@ public class JobPostingController : Controller
                 return NotFound();
             }
 
-            if (jobPostingFromDb!.OwnerUserName != User.Identity?.Name)
+            if (jobPostingFromDb!.OwnerUserName != User.Identity?.Name && !User.IsInRole("Admin"))
             {
                 return Unauthorized();
             }
@@ -107,7 +116,7 @@ public class JobPostingController : Controller
             jobFromDb.JobDescription = jobPosting.JobDescription;
             jobFromDb.JobLocation = jobPosting.JobLocation;
             jobFromDb.StartDate = jobPosting.StartDate;
-            jobFromDb.OwnerUserName = jobPosting.OwnerUserName;
+            // jobFromDb.OwnerUserName = jobPosting.OwnerUserName;
         }
 
 
