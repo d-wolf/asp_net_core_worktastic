@@ -16,7 +16,7 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 
 ## DB Sample Users
 ### Admin
-* name: admin@worktastic.com
+* name: `admin@worktastic.com`
 * pw: `Test.1234`
 ### User1
 * name: `max@mail.com`
