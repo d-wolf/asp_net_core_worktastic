@@ -18,8 +18,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var allJobPostings = _context.JobPostings.ToList();
-        return View(allJobPostings);
+        return View();
     }
 
     public IActionResult Privacy()

@@ -1,6 +1,4 @@
-﻿@model List<JobPosting>
-
-@{
+﻿@{
     ViewData["Title"] = "Job Übersicht";
 }
 
@@ -13,12 +11,13 @@
 
 <div class="row mt-4">
     <div class="col-12">
-        <input class="form-control-lg form-control" type="text" placeholder="What position are you searching for?">
+        <input id="inputQuery" class="form-control-lg form-control" type="text"
+            placeholder="What position are you searching for?">
     </div>
 </div>
 
 <div class="text-center mt-2">
-    <button class="btn btn-lg btn-primary">Suchen</button>
+    <button onclick="onClickSearch()" class="btn btn-lg btn-primary">Suchen</button>
 </div>
 
 <hr />
@@ -46,6 +45,11 @@
 @section Scripts {
     <script>
         $('#partialList').load("/home/GetJobPostingsPartial/");
+
+        function onClickSearch() {
+            var query = $('#inputQuery').val();
+            $('#partialList').load("/home/GetJobPostingsPartial?query=" + query);
+        }
 
         function showModal(id) {
             $.ajax({
