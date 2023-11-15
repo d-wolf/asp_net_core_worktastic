@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using worktastic.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,10 +12,36 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    string role = "Admin";
+    
+    if (!await roleManager.RoleExistsAsync(role))
+    {
+        await roleManager.CreateAsync(new IdentityRole(role));
+    }
+
+    if (await userManager.FindByNameAsync("Admin") == null)
+    {
+        var newUser = new IdentityUser()
+        {
+            UserName = "Admin",
+            Email = "admin@worktastic.com",
+        };
+        var result = await userManager.CreateAsync(newUser, "Test.1234");
+    }
+
+    var user = await userManager.FindByNameAsync("Admin");
+    await userManager.AddToRoleAsync(user!, role);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
