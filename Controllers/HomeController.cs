@@ -44,4 +44,20 @@ public class HomeController : Controller
             return NotFound();
         return Ok(posting);
     }
+
+
+    public IActionResult GetJobPostingsPartial(string query)
+    {
+        List<JobPosting> jobPostings = new();
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            jobPostings = _context.JobPostings.ToList();
+        }
+        else
+        {
+            jobPostings = _context.JobPostings.Where(x => x.JobTitle.Contains(query)).ToList();
+        }
+
+        return PartialView("_JobPostingListPartial", jobPostings);
+    }
 }
