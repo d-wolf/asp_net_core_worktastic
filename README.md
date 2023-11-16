@@ -29,6 +29,10 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 * build and run and automatically update changes `dotnet watch`
 * build and run `dotnet run`
 
+## Server Deployment
+### Ubuntu 20.04 LTS
+* [install the .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2004)
+
 ## Sources
 * https://github.com/JannickLeismann/worktastic
 * https://www.udemy.com/course/aspnet-core-intensivkurs/
