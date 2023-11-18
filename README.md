@@ -39,8 +39,11 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 
 #### Install & Configure Postgresql
 * (the following steps will all be on the server side)
-* `sudo apt install postgresql`
-* `service postgresql status`
+* [howto](https://ubuntu.com/server/docs/databases-postgresql)
+* intall `apt install postgresql`
+* connect to the default PostgreSQL template database `postgres psql template1`
+* change password for username postgres with `ALTER USER postgres with encrypted password 'postgres';`
+* check status `service postgresql status`
 
 #### Install & Configure Nginx
 * (the following steps will all be on the server side)
