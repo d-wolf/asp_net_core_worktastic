@@ -32,10 +32,10 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 ## Server Deployment
 ### Ubuntu 20.04 LTS
 #### Publish
-* run in project dir `dotnet publish --configuration Release`
-* copy files to the server `scp -r bin/Release/net8.0/publish/* username@remotecomputer:/var/www/worktastic`
+* run `dotnet publish --configuration Release` in local project dir 
+* copy the files to the server by running `scp -r bin/Release/net8.0/publish/* username@remotecomputer:/var/www/worktastic` locally
 * ssh to the server
-* [install the .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2004)
+* [install the .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2004) on the server
 
 #### Install & Configure Nginx
 * (the following steps will all be on the server side)
@@ -49,6 +49,7 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 * `nano /etc/nginx/sites-available/default`
 * add the following and save
 ```
+
 server {
     listen        80;
     location / {
@@ -71,7 +72,7 @@ server {
 * reload nginx with `sudo nginx -s reload` to apply the changes
 
 #### Test the site
-* run `dotnet /var/www/worktastic/worktastic.dll`
+* run `dotnet /var/www/worktastic/worktastic.dll` on the server
 * when we open the browser and navigate to the server ip the startpage of the site should be shown
 
 #### Setup service
