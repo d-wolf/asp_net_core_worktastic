@@ -9,7 +9,7 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 
 ## Common EF commands
 * EF base command `dotnet ef`
-* add migration `dotnet ef migrations add <NAME>`
+* add migration `dotnet ef migrations add <NAME> -o Data/Migrations`
 * create schema from migration `dotnet ef database update`
 * to learn more about migrations, see [here](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
 
