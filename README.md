@@ -31,7 +31,43 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 
 ## Server Deployment
 ### Ubuntu 20.04 LTS
+### Publish
+* run in project dir `dotnet publish --configuration Release`
+* copy files to the server `scp -r /bin/Release/net8.0/publish/* username@remotecomputer:/var/www/worktastic`
+* ssh to the server
 * [install the .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2004)
+
+### Install & configure Nginx
+* [install nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)
+* get nginx status `service nginx status`
+* run nginx `sudo service nginx start`
+* when we open the browser and navigate to the server ip, the nginx start page should be shown
+* go to `cd /etc/nginx`
+* `mkdir sites-available`
+* `mkdir sites-enabled`
+* `nano /etc/nginx/sites-available/default`
+* add the following and save
+```
+server {
+    listen        80;
+    location / {
+        proxy_pass         http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection keep-alive;
+        proxy_set_header   Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+}
+```
+* add symlink `sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default`
+* `nano nano /etc/nginx/nginx.conf`
+* add the line `include       /etc/nginx/sites-enabled/*;` to `http {}` and save
+* `sudo nginx -s reload`
+* run `sudo nginx -t` to verify the configuration
+* reload nginx with `sudo nginx -s reload` to apply the changes
 
 ## Sources
 * https://github.com/JannickLeismann/worktastic
