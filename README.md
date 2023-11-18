@@ -33,11 +33,12 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 ### Ubuntu 20.04 LTS
 #### Publish
 * run in project dir `dotnet publish --configuration Release`
-* copy files to the server `scp -r /bin/Release/net8.0/publish/* username@remotecomputer:/var/www/worktastic`
+* copy files to the server `scp -r bin/Release/net8.0/publish/* username@remotecomputer:/var/www/worktastic`
 * ssh to the server
 * [install the .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2004)
 
-#### Install & configure Nginx
+#### Install & Configure Nginx
+* (the following steps will all be on the server side)
 * [install nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)
 * get nginx status `service nginx status`
 * run nginx `sudo service nginx start`
@@ -73,6 +74,12 @@ server {
 * run `dotnet /var/www/worktastic/worktastic.dll`
 * when we open the browser and navigate to the server ip the startpage of the site should be shown
 
+#### Setup service
+* ssh to server and run `chown -R www-data:www-data /var/www`
+* run `scp -r worktastic-app.service username@remotecomputer:/etc/systemd/system` on the local machine in project directory
+* run `sudo systemctl enable worktastic-app.service` on server to enable the service
+* run `sudo systemctl start worktastic-app.service` to start the service
+  
 ## Sources
 * https://github.com/JannickLeismann/worktastic
 * https://www.udemy.com/course/aspnet-core-intensivkurs/
