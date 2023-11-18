@@ -31,7 +31,7 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 
 ## Server Deployment
 ### Ubuntu 20.04 LTS
-#### Publish
+#### Publish & Update
 * run `dotnet publish --configuration Release` in local project dir 
 * copy the files to the server by running `scp -r bin/Release/net8.0/publish/* username@remotecomputer:/var/www/worktastic` locally
 * ssh to the server
