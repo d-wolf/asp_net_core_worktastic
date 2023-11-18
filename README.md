@@ -37,6 +37,9 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 * ssh to the server
 * [install the .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2004) on the server
 
+#### Install & Configure Postgresql
+* `sudo apt install postgresql`
+
 #### Install & Configure Nginx
 * (the following steps will all be on the server side)
 * [install nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)
