@@ -38,7 +38,9 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 * [install the .NET runtime](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-2004) on the server
 
 #### Install & Configure Postgresql
+* (the following steps will all be on the server side)
 * `sudo apt install postgresql`
+* `service postgresql status`
 
 #### Install & Configure Nginx
 * (the following steps will all be on the server side)
