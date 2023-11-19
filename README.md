@@ -1,5 +1,5 @@
 # Worktastic
-Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/JannickLeismann). The original code can be found [here](https://github.com/JannickLeismann/worktastic). This version is upgraded to NET Core 7.0 using bootstrap 5. Below you'll find the most common cmd arguments if you are not developing with VS on windows.
+Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/JannickLeismann). The original code can be found [here](https://github.com/JannickLeismann/worktastic). This version is upgraded to NET Core 8.0 using bootstrap 5.1. Below you'll find the most common cmd arguments if you are not developing with VS on windows.
 
 ## Getting Started
 * install net core from [here](https://learn.microsoft.com/en-us/dotnet/core/install/)
