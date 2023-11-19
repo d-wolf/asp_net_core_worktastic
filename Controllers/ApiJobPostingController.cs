@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Worktastic.Data;
+using Worktastic.Filters;
 using Worktastic.Models;
 
 namespace Worktastic.Controllers;
 
 [Route("api/jobposting")]
 [ApiController]
+[ApiKeyAuthorization]
 public class ApiJobPostingController : ControllerBase
 {
 
