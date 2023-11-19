@@ -15,7 +15,9 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 
 ## Scaffolding
 * install ASP.NET Core scaffolder `dotnet tool install -g dotnet-aspnet-codegenerator`
-* add identity page with `dotnet aspnet-codegenerator identity -h`
+* `dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design`
+* show options with `dotnet aspnet-codegenerator identity -h`
+* add and modify login pages `dotnet aspnet-codegenerator identity -dc MyApplication.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"`
 
 ## DB Sample Users
 ### Admin
