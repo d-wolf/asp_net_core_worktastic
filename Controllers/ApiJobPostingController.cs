@@ -32,6 +32,19 @@ public class ApiJobPostingController : ControllerBase
         return Ok(posting);
     }
 
+    [HttpPost("Create")]
+    public IActionResult Create(JobPosting jobPosting)
+    {
+        if (jobPosting.Id != 0)
+        {
+            return BadRequest();
+        }
+
+        _context.JobPostings.Add(jobPosting);
+        _context.SaveChanges();
+        return Ok();
+    }
+
     // [HttpGet("{id}")]
     // public IActionResult Get(int id) {
     //     return Ok("value");
