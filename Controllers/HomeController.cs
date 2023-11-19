@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using worktastic.Data;
-using worktastic.Models;
+using Worktastic.Data;
+using Worktastic.Models;
 
-namespace worktastic.Controllers;
+namespace Worktastic.Controllers;
 
 public class HomeController : Controller
 {

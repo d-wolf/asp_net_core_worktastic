@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using worktastic.Models;
+using Worktastic.Models;
 
-namespace worktastic.Data;
+namespace Worktastic.Data;
 
 public class ApplicationDbContext : IdentityDbContext
 {

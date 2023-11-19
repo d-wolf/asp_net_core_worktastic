@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using worktastic.Data;
+using Worktastic.Data;
 
 #nullable disable
 
 namespace worktastic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231118210758_Init")]
+    [Migration("20231119171759_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -225,7 +225,7 @@ namespace worktastic.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("worktastic.Models.JobPosting", b =>
+            modelBuilder.Entity("Worktastic.Models.JobPosting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

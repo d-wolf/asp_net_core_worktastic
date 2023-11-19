@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using worktastic.Data;
-using worktastic.Models;
+using Worktastic.Data;
+using Worktastic.Models;
 
-namespace worktastic.Controllers;
+namespace Worktastic.Controllers;
 
 [Route("api/jobposting")]
 [ApiController]

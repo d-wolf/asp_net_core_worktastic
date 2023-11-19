@@ -1,4 +1,4 @@
-namespace worktastic.Models
+namespace Worktastic.Models
 {
     public class JobPosting
     {

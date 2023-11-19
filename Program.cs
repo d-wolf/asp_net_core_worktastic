@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using worktastic.Data;
+using Worktastic.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
