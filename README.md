@@ -13,6 +13,9 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 * create schema from migration `dotnet ef database update`
 * to learn more about migrations, see [here](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
 
+## Scaffolding
+* install ASP.NET Core scaffolder `dotnet tool install -g dotnet-aspnet-codegenerator`
+* add identity page with `dotnet aspnet-codegenerator identity -h`
 
 ## DB Sample Users
 ### Admin
