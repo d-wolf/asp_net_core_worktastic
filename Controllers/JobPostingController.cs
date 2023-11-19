@@ -77,7 +77,7 @@ public class JobPostingController : Controller
 
     public IActionResult CreateEditJob(JobPosting jobPosting, IFormFile file)
     {
-
+        jobPosting.StartDate = DateTime.SpecifyKind(jobPosting.StartDate, DateTimeKind.Utc);
         jobPosting.OwnerUserName = User.Identity!.Name!;
 
         if (file != null)

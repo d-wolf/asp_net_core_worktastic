@@ -5,19 +5,35 @@ using worktastic.Models;
 
 namespace worktastic.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/jobposting")]
 [ApiController]
-public class ApiJobPostingController : ControllerBase {
- 
-    [HttpGet("")] //Matches GET api/admin <-- Would also work with [HttpGet]
-    public IActionResult Get() {
-        return Ok();
+public class ApiJobPostingController : ControllerBase
+{
+
+    private readonly ApplicationDbContext _context;
+
+    public ApiJobPostingController(ApplicationDbContext context)
+    {
+        _context = context;
     }
 
-    [HttpGet("{id}")] //Matches GET api/admin/5
-    public IActionResult Get(int id) {
-        return Ok("value");
-    }    
+    [HttpGet("GetAll")]
+    public IActionResult GetAll()
+    {
+        var all = _context.JobPostings.ToList();
+        return Ok(all);
+    }
 
-    //...other code removed for brevity
+    [HttpGet("GetById")]
+    public IActionResult Get(int id)
+    {
+        var posting = _context.JobPostings.SingleOrDefault(x => x.Id == id);
+        if (posting == null) return NotFound();
+        return Ok(posting);
+    }
+
+    // [HttpGet("{id}")]
+    // public IActionResult Get(int id) {
+    //     return Ok("value");
+    // }
 }
