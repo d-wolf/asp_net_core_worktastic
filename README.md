@@ -46,7 +46,7 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 * (the following steps will all be on the server side)
 * [howto](https://ubuntu.com/server/docs/databases-postgresql)
 * intall `apt install postgresql`
-* connect to the default PostgreSQL template database `postgres psql template1`
+* login `sudo -u postgres psql`
 * change password for username postgres with `ALTER USER postgres with encrypted password 'postgres';`
 * check status `service postgresql status`
 
@@ -54,7 +54,7 @@ Based on the Asp .NET Core course of [Jannick Leismann](https://github.com/Janni
 * (the following steps will all be on the server side)
 * [install nginx](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-debian-ubuntu-packages)
 * get nginx status `service nginx status`
-* run nginx `sudo service nginx start`
+* run nginx `service nginx start`
 * when we open the browser and navigate to the server ip, the nginx start page should be shown
 * go to `cd /etc/nginx`
 * `mkdir sites-available`
@@ -91,8 +91,8 @@ server {
 #### Setup service
 * ssh to server and run `chown -R www-data:www-data /var/www`
 * run `scp -r worktastic-app.service username@remotecomputer:/etc/systemd/system` on the local machine in project directory
-* run `sudo systemctl enable worktastic-app.service` on server to enable the service
-* run `sudo systemctl start worktastic-app.service` to start the service
+* run `systemctl enable worktastic-app.service` on server to enable the service
+* run `systemctl start worktastic-app.service` to start the service
   
 ## Sources
 * https://github.com/JannickLeismann/worktastic
